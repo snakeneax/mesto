@@ -5,3 +5,12 @@
   top: -36px;
   right: 0;
 }
+
+@media screen and (min-width: 1280px) {
+  .popup__exit {
+    width: 32px;
+    height: 32px; 
+    top: -40px;
+    right: -40px;
+  }
+}

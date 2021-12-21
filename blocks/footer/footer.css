@@ -10,6 +10,7 @@
 @media screen and (min-width: 1280px) {
   .footer {
     margin: 67px 0 60px 200px;
+    width: calc(100% - (200px*2));
     align-items: flex-start;
   }
 }

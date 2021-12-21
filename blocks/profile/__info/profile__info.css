@@ -1,0 +1,12 @@
+.profile__info {
+  display: flex;
+  max-width: 282px;
+  align-items: baseline;
+}
+
+@media screen and (min-width: 1280px) {
+  .profile__info {
+  max-width: 336px;
+  padding: 15px 0 0 0;
+  }
+}

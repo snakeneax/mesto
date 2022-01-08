@@ -6,9 +6,8 @@
 
 @media screen and (min-width: 1280px) {
   .profile__card {
-    flex-direction: column;
     flex-wrap: wrap;
-    max-height: 120px;
     align-items: flex-start;
+    flex-direction: row;
   }
 }

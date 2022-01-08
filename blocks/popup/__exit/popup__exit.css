@@ -4,6 +4,17 @@
   position: absolute;
   top: -36px;
   right: 0;
+  background-image: url(../../../images/CloseIcon.svg);
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-position: center;
+  box-sizing: border-box;
+  border: none;
+  cursor: pointer;
+}
+
+.popup__exit:hover {
+  opacity: 0.6;
 }
 
 @media screen and (min-width: 1280px) {

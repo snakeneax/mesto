@@ -4,7 +4,6 @@
   border: 0;
   border-radius: 2px;
   background-color: black;
-  font-family: Inter;
   font-style: normal;
   font-weight: normal;
   font-size: 14px;
@@ -13,11 +12,20 @@
   color: #FFFFFF;
   min-width: 238px;
   min-height: 46px;
+  cursor: pointer;
+}
+
+.popup__save:hover {
+  opacity: 0.8;
 }
 
 @media screen and (min-width: 1280px) {
-  .popup__name {
+  .popup__save {
     min-width: 358px;
     min-height: 50px;
+    margin: 45px 0 0 0;
+    font-style: normal;
+    font-size: 18px;
+    line-height: 22px;
   }
 }

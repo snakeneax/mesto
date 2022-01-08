@@ -1,19 +1,11 @@
-.popup__profession {
-  margin: 30px 0 0 00;
+.popup__input {
   padding: 0;
   border: 0;
   border-bottom: 1px solid rgba(0,0,0,0.2);
-  font-family: Inter;
   font-style: normal;
   font-weight: normal;
   font-size: 14px;
   line-height: 17px;
   color: #000000;
   min-height: 27px;
-}
-
-@media screen and (min-width: 1280px) {
-  .popup__profession {
-    margin: 20px 0 0 0;
-  }
 }

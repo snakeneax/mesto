@@ -6,7 +6,7 @@ let namePopup = document.querySelector('.popup__input_type_name');
 let jobPopup = document.querySelector('.popup__input_type_profession');
 let profileName = document.querySelector('.profile__name');
 let profileProfession = document.querySelector('.profile__profession');
-
+let popupForm = document.querySelector('.popup__form')
 let AddButton = document.querySelector ('.profile__button');
 let popupAddCard = document.querySelector ('#popupAddCard');
 let closeBtnAdd = document.querySelector ('.popup__exit_add');
@@ -86,21 +86,41 @@ function render() {
   cardsInfo.forEach(renderCards);
 }
 
+const ActiveLikeBtn = (event) => {
+  event.target.closest('.element__button_like').classList.toggle('element__button_like_active')
+};
+
 function renderCards({ name, link }) {
   const cardsElement = cardsTemplate.querySelector(".element").cloneNode(true);
   cardsElement.querySelector(".element__info").textContent = name;
   cardsElement.querySelector(".element__photo").src = link;
   elements.prepend(cardsElement);
+
+  const likeBtn = cardsElement.querySelector('.element__button_like')
+  likeBtn.addEventListener('click', ActiveLikeBtn)
+
 }
 render();
 
 // add cards 
 
 const addCard = document.querySelector('.popup__save')
+
 const formSubmitHandlerAdd = (evt) => {
   evt.preventDefault();
   renderCards({ name: inputPlace.value, link: inputImage.value })
-}
-popupAddCard.addEventListener('submit', formSubmitHandlerAdd)
+  closePopup(popupAddCard);
+  evt.target.reset();
+};
+
+popupAddCard.addEventListener('submit', formSubmitHandlerAdd);
 
 
+
+//like card 
+
+//const likebtn = cardsTemplate.querySelector(".element__button_like");
+
+//likebtn.addEventListener('click',function (evt) {
+  //evt.target.classList.toggle('element__button_like_active');
+//});

@@ -1,14 +1,14 @@
-.element__button {
+.element__button_like {
   margin: 0;
   padding: 0;
   min-width: 22px;
   height: 19px;
   border: 0;
-  background-image: url(../../../images/Vector.svg);
+  background-image: url(../../../../images/Vector.svg);
   background-color: transparent;
   cursor: pointer;
 }
 
-.element__button:hover {
+.element__button_like:hover {
   opacity: 0.5;
 }

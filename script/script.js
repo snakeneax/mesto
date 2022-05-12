@@ -95,3 +95,12 @@ function renderCards({ name, link }) {
 render();
 
 // add cards 
+
+const addCard = document.querySelector('.popup__save')
+const formSubmitHandlerAdd = (evt) => {
+  evt.preventDefault();
+  renderCards({ name: inputPlace.value, link: inputImage.value })
+}
+popupAddCard.addEventListener('submit', formSubmitHandlerAdd)
+
+

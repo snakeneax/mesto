@@ -84,10 +84,14 @@ const cardsInfo = initialCards.map(function (item) {
 
 function render() {
   cardsInfo.forEach(renderCards);
-}
+};
 
 const ActiveLikeBtn = (event) => {
   event.target.closest('.element__button_like').classList.toggle('element__button_like_active')
+};
+
+const DeleteCard = (event) => {
+  event.target.closest('.element').remove();
 };
 
 function renderCards({ name, link }) {
@@ -99,6 +103,8 @@ function renderCards({ name, link }) {
   const likeBtn = cardsElement.querySelector('.element__button_like')
   likeBtn.addEventListener('click', ActiveLikeBtn)
 
+  const deleteBtn = cardsElement.querySelector('.element__button_delete')
+  deleteBtn.addEventListener('click', DeleteCard)
 }
 render();
 

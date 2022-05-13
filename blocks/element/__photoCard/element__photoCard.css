@@ -1,0 +1,5 @@
+.element__photoCard {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}

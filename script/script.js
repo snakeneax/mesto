@@ -15,6 +15,7 @@ const inputPlace = document.querySelector ('.popup__input_type_place');
 const inputImage = document.querySelector ('.popup__input_type_image');
 const addCard = document.querySelector('.popup__save');
 const popups = document.querySelectorAll('.popup')
+const cardsTemplate = document.querySelector("#cardTemplate").content.querySelector(".element");
 const initialCards = [
   {
     name: 'Архыз',
@@ -82,8 +83,10 @@ const deleteCard = (event) => {
 
 const handleProfileFormSubmitAdd = (evt) => {
   evt.preventDefault();
-  renderCards({ name: inputPlace.value, link: inputImage.value });
-  closePopup(popupAddCard);
+  const placeName = inputPlace.value
+  const placePic = inputImage.value
+  cardsElement = renderCards(placeName, placePic)
+  createCard(cardsElement)
   evt.target.reset();
 };
 
@@ -92,20 +95,15 @@ formElementEdit.addEventListener('submit', handleProfileFormSubmitEdit);
 editButton.addEventListener('click', openEditModal);
 addButton.addEventListener('click', () => openPopup(popupAddCard));
 
-const cardsTemplate = document.querySelector("#cardTemplate").content.querySelector(".element");
-
-
-function renderCards({ title, img}) {
+function renderCards(title, img) {
   const cardsElement = cardsTemplate.cloneNode(true);
   const likeBtn = cardsElement.querySelector('.element__button_like');
   const deleteBtn = cardsElement.querySelector('.element__button_delete');
   const titleCard = cardsElement.querySelector(".element__info");
   const linkCard = cardsElement.querySelector(".element__photo");
-
   titleCard.textContent = title;
   linkCard.src = img;
   linkCard.alt = title;
-
   likeBtn.addEventListener('click', activeLikeBtn);
   deleteBtn.addEventListener('click', deleteCard);
   cardsElement.querySelector(".element__photo").addEventListener("click", function () {
@@ -114,16 +112,14 @@ function renderCards({ title, img}) {
   popupZoomPhoto.alt = title;
   openPopup(popupZoomCard);
   });
-
   return cardsElement;
 };
-
 
 function createCard (cardsElement){
   elements.prepend(cardsElement);
 };
 
 initialCards.forEach(function (item) {
-  cardsElement = renderCards({title: item.name, img: item.link});
+  cardsElement = renderCards(item.name,item.link);
   createCard(cardsElement);
 });

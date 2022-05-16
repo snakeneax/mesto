@@ -5,7 +5,7 @@ const namePopup = document.querySelector('.popup__input_type_name');
 const jobPopup = document.querySelector('.popup__input_type_profession');
 const profileName = document.querySelector('.profile__name');
 const profileProfession = document.querySelector('.profile__profession');
-const AddButton = document.querySelector ('.profile__button');
+const addButton = document.querySelector ('.profile__button');
 const popupAddCard = document.querySelector ('#popupAddCard');
 const popupZoomCard = document.querySelector ('#popup__ShowPhoto');
 const popupZoomPhoto = popupZoomCard.querySelector ('.popup__image');
@@ -13,9 +13,9 @@ const popupZoomTitle = popupZoomCard.querySelector ('.popup__image-caption')
 const elements = document.querySelector ('.elements');
 const inputPlace = document.querySelector ('.popup__input_type_place');
 const inputImage = document.querySelector ('.popup__input_type_image');
-const cardsTemplate = document.querySelector("#cardTemplate").content;
 const addCard = document.querySelector('.popup__save');
 const popups = document.querySelectorAll('.popup')
+const cardsTemplate = document.querySelector("#cardTemplate").content;
 const initialCards = [
   {
     name: 'Архыз',
@@ -51,10 +51,6 @@ function closePopup(popup) {
   popup.classList.remove('popup_opened');
 };
 
-function render() {
-  cardsInfo.forEach(renderCards);
-};
-
 function handleProfileFormSubmitEdit (evt) {
   evt.preventDefault();
   profileName.textContent = namePopup.value;
@@ -76,30 +72,29 @@ popups.forEach((popup) => {
   })
 });
 
-function renderCards({ name, link, alt }) {
+function renderCards({ title, img}) {
   const cardsElement = cardsTemplate.querySelector(".element").cloneNode(true);
   const likeBtn = cardsElement.querySelector('.element__button_like');
   const deleteBtn = cardsElement.querySelector('.element__button_delete');
-  cardsElement.querySelector(".element__info").textContent = name;
-  cardsElement.querySelector(".element__photo").src = link;
-  cardsElement.querySelector(".element__photo").alt = name;
-  elements.prepend(cardsElement);
+  const titleCard = cardsElement.querySelector(".element__info");
+  const linkCard = cardsElement.querySelector(".element__photo");
+
+  titleCard.textContent = title;
+  linkCard.src = img;
+  linkCard.alt = title;
+
   likeBtn.addEventListener('click', activeLikeBtn);
   deleteBtn.addEventListener('click', deleteCard);
   cardsElement.querySelector(".element__photo").addEventListener("click", function () {
-  popupZoomPhoto.src = link;
-  popupZoomTitle.textContent = name;
-  popupZoomPhoto.alt = name;
+
+  popupZoomPhoto.src = img;
+  popupZoomTitle.textContent = title;
+  popupZoomPhoto.alt = title;
+
   openPopup(popupZoomCard);
   });
+  return cardsElement;
 };
-
-const cardsInfo = initialCards.map(function (item) {
-  return {
-    name: item.name,
-    link: item.link
-  };
-});
 
 const activeLikeBtn = (event) => {
   event.target.closest('.element__button_like').classList.toggle('element__button_like_active');
@@ -119,5 +114,13 @@ const handleProfileFormSubmitAdd = (evt) => {
 popupAddCard.addEventListener('submit', handleProfileFormSubmitAdd);
 formElementEdit.addEventListener('submit', handleProfileFormSubmitEdit); 
 editButton.addEventListener('click', openEditModal);
-AddButton.addEventListener('click', () => openPopup(popupAddCard));
-render();
+addButton.addEventListener('click', () => openPopup(popupAddCard));
+
+function createCard (cardsElement){
+  elements.prepend(cardsElement);
+};
+
+initialCards.forEach(function (item) {
+  cardsElement = renderCards (item.name, item.link)
+  createCard(cardsElement)
+})

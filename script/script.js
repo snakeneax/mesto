@@ -1,47 +1,21 @@
-const editButton = document.querySelector ('.profile__edit');
+const buttonEdit = document.querySelector ('.profile__edit');
 const popupEdit = document.querySelector ('#popupEdit');
 const formElementEdit = document.querySelector ('.popup__form_type_edit');
 const namePopup = document.querySelector('.popup__input_type_name');
 const jobPopup = document.querySelector('.popup__input_type_profession');
 const profileName = document.querySelector('.profile__name');
 const profileProfession = document.querySelector('.profile__profession');
-const addButton = document.querySelector ('.profile__button');
+const buttonAdd = document.querySelector ('.profile__button');
 const popupAddCard = document.querySelector ('#popupAddCard');
 const popupZoomCard = document.querySelector ('#popup__ShowPhoto');
 const popupZoomPhoto = popupZoomCard.querySelector ('.popup__image');
 const popupZoomTitle = popupZoomCard.querySelector ('.popup__image-caption')
-const elements = document.querySelector ('.elements');
+const element = document.querySelector ('.elements');
 const inputPlace = document.querySelector ('.popup__input_type_place');
 const inputImage = document.querySelector ('.popup__input_type_image');
-const addCard = document.querySelector('.popup__save');
+
 const popups = document.querySelectorAll('.popup')
 const cardsTemplate = document.querySelector("#cardTemplate").content.querySelector(".element");
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-]; 
 
 function openPopup(popup) {
   popup.classList.add('popup_opened'); 
@@ -52,7 +26,6 @@ function openPopup(popup) {
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
   document.removeEventListener('keydown', handleEscPress);
-  popup.removeEventListener('click', closePopupByClickOnOverlay);
 };
 
 const handleEscPress = (evt) => {
@@ -66,8 +39,8 @@ const closePopupByClickOnOverlay = (evt) => {
   if (evt.target !== evt.currentTarget) {
     return;
   }
-  const popup = document.querySelector('.popup_opened');
-  closePopup(popup);
+  evt.currentTarget = document.querySelector('.popup_opened');
+  closePopup(evt.currentTarget);
 };
 
 popups.forEach((popup) => {
@@ -89,55 +62,62 @@ function openEditModal() {
   openPopup(popupEdit);
   namePopup.value = profileName.textContent;
   jobPopup.value = profileProfession.textContent;
+  const popupErrorText = popupEdit.querySelector('.popup__error');
+  const popupErrorBorder = popupEdit.querySelector('.popup__input');
+  popupErrorText.classList.remove('popup__error_visible');
+  popupErrorBorder.classList.remove('popup__input_type_error');
 };
 
-const activeLikeBtn = (event) => {
+const handleLikeClick = (event) => {
   event.target.closest('.element__button_like').classList.toggle('element__button_like_active');
 };
 
-const deleteCard = (event) => {
+const handleDeleteClick = (event) => {
   event.target.closest('.element').remove();
 };
 
 const handleProfileFormSubmitAdd = (evt) => {
   evt.preventDefault();
-  const placeName = inputPlace.value
-  const placePic = inputImage.value
-  cardsElement = renderCards(placeName, placePic)
-  createCard(cardsElement)
+  const popupSaveButton = popupAddCard.querySelector('.popup__button-save');
+  popupSaveButton.classList.add('popup__button-save_disabled');
+  const placeName = inputPlace.value;
+  const placePic = inputImage.value;
+  cardsElement = createCard(placeName, placePic);
+  renderCards(cardsElement);
+  closePopup(popupAddCard);
   evt.target.reset();
 };
 
 popupAddCard.addEventListener('submit', handleProfileFormSubmitAdd);
 formElementEdit.addEventListener('submit', handleProfileFormSubmitEdit); 
-editButton.addEventListener('click', openEditModal);
-addButton.addEventListener('click', () => openPopup(popupAddCard));
+buttonEdit.addEventListener('click', openEditModal);
+buttonAdd.addEventListener('click', () => openPopup(popupAddCard));
 
-function renderCards(title, img) {
+function createCard({ name, link }) {
   const cardsElement = cardsTemplate.cloneNode(true);
-  const likeBtn = cardsElement.querySelector('.element__button_like');
-  const deleteBtn = cardsElement.querySelector('.element__button_delete');
+  const buttonLike = cardsElement.querySelector('.element__button_like');
+  const buttonDelete = cardsElement.querySelector('.element__button_delete');
   const titleCard = cardsElement.querySelector(".element__info");
   const linkCard = cardsElement.querySelector(".element__photo");
-  titleCard.textContent = title;
-  linkCard.src = img;
-  linkCard.alt = title;
-  likeBtn.addEventListener('click', activeLikeBtn);
-  deleteBtn.addEventListener('click', deleteCard);
+  titleCard.textContent = name;
+  linkCard.src = link;
+  linkCard.alt = name;
+  buttonLike.addEventListener('click', handleLikeClick);
+  buttonDelete.addEventListener('click', handleDeleteClick);
   cardsElement.querySelector(".element__photo").addEventListener("click", function () {
-  popupZoomPhoto.src = img;
-  popupZoomTitle.textContent = title;
-  popupZoomPhoto.alt = title;
+  popupZoomPhoto.src = link;
+  popupZoomTitle.textContent = name;
+  popupZoomPhoto.alt = name;
   openPopup(popupZoomCard);
   });
   return cardsElement;
 };
 
-function createCard (cardsElement){
-  elements.prepend(cardsElement);
+function renderCards (cardsElement){
+  element.prepend(cardsElement);
 };
 
 initialCards.forEach(function (item) {
-  cardsElement = renderCards(item.name,item.link);
-  createCard(cardsElement);
+  cardsElement = createCard({ name: item.name, link: item.link });
+  renderCards(cardsElement);
 });

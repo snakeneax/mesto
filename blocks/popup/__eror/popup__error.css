@@ -4,5 +4,12 @@
   font-size: 12px;
   line-height: 15px;
   color: red;
-  max-width: 358px;
+  max-width: 238px;
+  height: 30px;
+}
+
+@media screen and (min-width: 1280px) {
+  .popup__error {
+    max-width: 358px;
+  }
 }

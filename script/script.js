@@ -13,14 +13,13 @@ const popupZoomTitle = popupZoomCard.querySelector ('.popup__image-caption')
 const element = document.querySelector ('.elements');
 const inputPlace = document.querySelector ('.popup__input_type_place');
 const inputImage = document.querySelector ('.popup__input_type_image');
-
+const errorText = document.querySelectorAll ('.popup__error')
 const popups = document.querySelectorAll('.popup')
 const cardsTemplate = document.querySelector("#cardTemplate").content.querySelector(".element");
 
 function openPopup(popup) {
   popup.classList.add('popup_opened'); 
   document.addEventListener('keydown', handleEscPress);
-  popup.addEventListener('click', closePopupByClickOnOverlay);
 };
 
 function closePopup(popup) {
@@ -35,17 +34,9 @@ const handleEscPress = (evt) => {
   }
 };
 
-const closePopupByClickOnOverlay = (evt) => {
-  if (evt.target !== evt.currentTarget) {
-    return;
-  }
-  evt.currentTarget = document.querySelector('.popup_opened');
-  closePopup(evt.currentTarget);
-};
-
 popups.forEach((popup) => {
   popup.addEventListener('click', (evt) => {
-     if (evt.target.classList.contains('popup__button-close')) {
+    if (evt.target.classList.contains('popup__button-close') || (evt.target === evt.currentTarget)) {
         closePopup(popup)
       }
   })
@@ -58,14 +49,17 @@ function handleProfileFormSubmitEdit (evt) {
   closePopup(popupEdit);
 };  
 
+const resetPopupEdit = () => {
+  errorText.forEach((text) => text.textContent = '');
+  namePopup.classList.remove('popup__input_type_error');
+  jobPopup.classList.remove('popup__input_type_error');
+}
+
 function openEditModal() {
   openPopup(popupEdit);
   namePopup.value = profileName.textContent;
   jobPopup.value = profileProfession.textContent;
-  const popupErrorText = popupEdit.querySelector('.popup__error');
-  const popupErrorBorder = popupEdit.querySelector('.popup__input');
-  popupErrorText.classList.remove('popup__error_visible');
-  popupErrorBorder.classList.remove('popup__input_type_error');
+  resetPopupEdit()
 };
 
 const handleLikeClick = (event) => {
@@ -78,11 +72,12 @@ const handleDeleteClick = (event) => {
 
 const handleProfileFormSubmitAdd = (evt) => {
   evt.preventDefault();
-  const popupSaveButton = popupAddCard.querySelector('.popup__button-save');
-  popupSaveButton.classList.add('popup__button-save_disabled');
   const placeName = inputPlace.value;
   const placePic = inputImage.value;
+  const submitButtonElement = popupAddCard.querySelector('.popup__button-save')
+  const inactiveButtonClass = popupAddCard.querySelector('.popup__button-save_disabled')
   cardsElement = createCard(placeName, placePic);
+  setDisabledOnSubmitButton (submitButtonElement, inactiveButtonClass);
   renderCards(cardsElement);
   closePopup(popupAddCard);
   evt.target.reset();

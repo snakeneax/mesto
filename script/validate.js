@@ -8,9 +8,8 @@ const showError = (formElement, inputElement, errorMessage, errorClass, inputErr
 };
 
 const hideError = (formElement, inputElement, errorClass, inputErrorClass) => {
-  const defaultErrorMessage = 'Вы пропустили это поле.';
   const errorElement = getErrorElement(formElement, inputElement);
-  errorElement.textContent = defaultErrorMessage;
+  errorElement.textContent = '';
   errorElement.classList.remove(errorClass);
   inputElement.classList.remove(inputErrorClass);
 };
@@ -25,11 +24,15 @@ const checkValidity = (formElement, inputElement, errorClass, inputErrorClass) =
   }
 };
 
+function setDisabledOnSubmitButton (submitButtonElement, inactiveButtonClass) {
+  submitButtonElement.classList.add(inactiveButtonClass);
+  submitButtonElement.setAttribute('disabled', true);
+};
+
 const toggleButtonState = (inputList, submitButtonElement, inactiveButtonClass) => {
   const hasInvalidInput = inputList.some((inputElement) => !inputElement.validity.valid);
   if (hasInvalidInput) {
-    submitButtonElement.classList.add(inactiveButtonClass);
-    submitButtonElement.setAttribute('disabled', true);
+    setDisabledOnSubmitButton(submitButtonElement, inactiveButtonClass);
   } else {
     submitButtonElement.classList.remove(inactiveButtonClass);
     submitButtonElement.removeAttribute('disabled');

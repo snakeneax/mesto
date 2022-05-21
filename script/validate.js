@@ -27,6 +27,8 @@ const checkValidity = (formElement, inputElement, errorClass, inputErrorClass) =
 function setDisabledOnSubmitButton (submitButtonElement, inactiveButtonClass) {
   submitButtonElement.classList.add(inactiveButtonClass);
   submitButtonElement.setAttribute('disabled', true);
+  console.log(inactiveButtonClass);
+  console.log(submitButtonElement);
 };
 
 const toggleButtonState = (inputList, submitButtonElement, inactiveButtonClass) => {

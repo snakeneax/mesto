@@ -75,7 +75,7 @@ const handleProfileFormSubmitAdd = (evt) => {
   const placeName = inputPlace.value;
   const placePic = inputImage.value;
   const submitButtonElement = popupAddCard.querySelector('.popup__button-save')
-  cardsElement = createCard(placeName, placePic);
+  cardsElement = createCard({name: placeName, link: placePic});
   setDisabledOnSubmitButton (submitButtonElement, 'popup__button-save_disabled');
   renderCards(cardsElement);
   closePopup(popupAddCard);

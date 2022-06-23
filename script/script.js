@@ -16,7 +16,7 @@ const jobPopup = popupEdit.querySelector('.popup__input_type_profession');
 const popupAddCard = document.querySelector ('#popupAddCard');
 const formElementAdd = document.querySelector('.popup__form_type_add')
 const inputTitle = document.querySelector('#place')
-const inputLink = document.querySelector('#link')
+const inputLink = document.querySelector('#src')
 
 const popups = document.querySelectorAll('.popup')
 
@@ -85,6 +85,17 @@ export default function openPopup(popup) {
   popup.classList.add('popup_opened'); 
   document.addEventListener('keydown', handleEscPress);
 };
+
+function handleCardClick ({name, link}) {
+  popupZoomCard = document.querySelector ('#popup__ShowPhoto');
+  popupZoomPhoto = popupZoomCard.querySelector ('.popup__image');
+  popupZoomTitle = popupZoomCard.querySelector ('.popup__image-caption');
+
+  popupZoomPhoto.src = link;
+  popupZoomPhoto.alt = name;
+
+  openPopup(popupZoomPhoto);
+}
 
 const closePopup = (popup) => {
   popup.classList.remove('popup_opened');

@@ -4,6 +4,7 @@ export default class Card {
   _popupZoomCard = document.querySelector ('#popup__ShowPhoto');
   _popupZoomPhoto = this._popupZoomCard.querySelector ('.popup__image');
   _popupZoomTitle = this._popupZoomCard.querySelector ('.popup__image-caption');
+  
  
   constructor(data, cardSelector) {
     this._data = data;

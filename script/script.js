@@ -29,6 +29,7 @@ const validationSettings = {
   inactiveButtonClass: 'popup__button-save_disabled',
   inputErrorClass: 'popup__input_type_error',
   errorClass: 'popup__error_visible',
+  errorMessage: 'popup__error',
 };
 
 const validationPopupEdit = new FormValidator (validationSettings, formElementEdit);
@@ -85,17 +86,6 @@ export default function openPopup(popup) {
   popup.classList.add('popup_opened'); 
   document.addEventListener('keydown', handleEscPress);
 };
-
-function handleCardClick ({name, link}) {
-  popupZoomCard = document.querySelector ('#popup__ShowPhoto');
-  popupZoomPhoto = popupZoomCard.querySelector ('.popup__image');
-  popupZoomTitle = popupZoomCard.querySelector ('.popup__image-caption');
-
-  popupZoomPhoto.src = link;
-  popupZoomPhoto.alt = name;
-
-  openPopup(popupZoomPhoto);
-}
 
 const closePopup = (popup) => {
   popup.classList.remove('popup_opened');

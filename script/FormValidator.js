@@ -1,10 +1,10 @@
+
 export default class FormValidator {
   constructor(validationSettings, formElement) {
     this._validationSettings = validationSettings;
     this._formElement = formElement;
     this._submitButtonElement = this._formElement.querySelector(this._validationSettings.submitButtonSelector);
     this._inputs = Array.from(this._formElement.querySelectorAll(this._validationSettings.inputSelector));
-    this._errorFields = this._formElement.querySelectorAll(this._validationSettings.errorMessage)
   }
 
 // получить ошибку
@@ -72,14 +72,13 @@ export default class FormValidator {
     this._inputs.forEach(inputListIterator);
   }
 
-  _enableValidation () {
+  enableValidation () {
     this._formElement.addEventListener('submit', (e) => e.preventDefault());
     this._setEventListeners();
   }
 
   resetPopupForm () {
-    this._errorFields.forEach((field) => fieild.textContent = '');
-    this._inputs.forEach((input) => input.classList.remove(this._validationSettings.inputErrorClass))
+    this._inputs.forEach((input) =>  this._hideError(input))
     this._disableButton();
   }
 }

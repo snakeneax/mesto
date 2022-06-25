@@ -35,8 +35,8 @@ const validationSettings = {
 const validationPopupEdit = new FormValidator (validationSettings, formElementEdit);
 const validationPopupAdd = new FormValidator (validationSettings, formElementAdd);
 
-validationPopupEdit._enableValidation();
-validationPopupAdd._enableValidation();
+validationPopupEdit.enableValidation();
+validationPopupAdd.enableValidation();
 
 const generateCard = (card) => new Card (card, '#cardTemplate').generate();
 
@@ -52,7 +52,7 @@ const addCard = () => {
   element.prepend(newCard);
 };
 
-const profileDataChange = () => {
+const changeProfileData = () => {
   const name = namePopup.value;
   const profession = jobPopup.value;
   if (name !== profileName.textContent) {
@@ -65,7 +65,7 @@ const profileDataChange = () => {
 
 const handleProfileFormSubmitEdit = (evt) => {
   evt.preventDefault();
-  profileDataChange();
+  changeProfileData();
   closePopup(popupEdit);
 };
 

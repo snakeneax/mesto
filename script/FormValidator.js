@@ -46,7 +46,6 @@ export default class FormValidator {
     this._submitButtonElement.disabled = true;
   }
   
-
 // дизейблим либо активируем кнопку сабмита 
   _toggleButtonState () {
     const hasInvalidInput = this._inputs.some((inputElement) => !inputElement.validity.valid);

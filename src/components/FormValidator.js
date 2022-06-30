@@ -32,9 +32,7 @@ export default class FormValidator {
 
 // проверяем валидацию 
   _checkValidity (inputElement) {
-    const isInputNotValid = !inputElement.validity.valid;
-    
-    if (isInputNotValid) {
+    if (!inputElement.validity.valid) {
       this._showError(inputElement, inputElement.validationMessage);
     } else {
       this._hideError(inputElement);
@@ -45,12 +43,19 @@ export default class FormValidator {
     this._submitButtonElement.classList.add(this._validationSettings.inactiveButtonClass);
     this._submitButtonElement.disabled = true;
   }
+
   
+  // проверяем инпаты на валдиность
+  _hasInvalidInput () {
+    return this._inputs.some ((inputElement) => {
+      return !inputElement.validity.valid
+    })
+  }
+
+
 // дизейблим либо активируем кнопку сабмита 
   _toggleButtonState () {
-    const hasInvalidInput = this._inputs.some((inputElement) => !inputElement.validity.valid);
-
-    if (hasInvalidInput) {
+    if (this._hasInvalidInput()) {
       this._disableButton();
     } else {
       this._submitButtonElement.classList.remove(this._validationSettings.inactiveButtonClass);

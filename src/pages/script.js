@@ -1,6 +1,6 @@
 // Импортируем
 import '../pages/index.css'
-import initialCards from "../components/initialCards.js";
+import initialCards from "../utils/initialCards.js";
 import { 
   buttonEdit,
   buttonAdd,
@@ -16,7 +16,7 @@ import {
   popupEditSelector,
   cardTemplateSelector,
   elementSelector,
-} from '../components/constants.js'
+} from '../utils/constants.js'
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
 import PopupWithForm from "../components/PopupWithForm.js";
@@ -60,8 +60,13 @@ const popupEdit = new PopupWithForm (popupEditSelector, ({ name, profession }) =
 popupEdit.setEventListeners();
 buttonEdit.addEventListener('click', () => {
   validationPopupEdit.resetPopupForm();
-  namePopup.value = userInfo.getUserInfo().name;
-  jobPopup.value = userInfo.getUserInfo().profession;
+
+  const userName = userInfo.getUserInfo().name;
+  const userProfession = userInfo.getUserInfo().profession;
+
+  namePopup.value = userName;
+  jobPopup.value = userProfession;
+  
   popupEdit.open();
 });
 

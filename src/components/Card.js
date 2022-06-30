@@ -48,9 +48,9 @@ export default class Card {
     this._getElement();
     this._setEventListeners();
     
-    this.photo.alt = this._data.name;
+    this.photo.alt = this._data.title;
     this.photo.src = this._data.link;
-    this._element.querySelector('.element__info').textContent = this._data.name;
+    this._element.querySelector('.element__info').textContent = this._data.title;
     return this._element;
   }
 }

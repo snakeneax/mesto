@@ -57,16 +57,11 @@ const userInfo = new UserInfo({
 const popupEdit = new PopupWithForm (popupEditSelector, ({ name, profession }) => {
   userInfo.setUserInfo({ name, profession });
 });
+
 popupEdit.setEventListeners();
 buttonEdit.addEventListener('click', () => {
   validationPopupEdit.resetPopupForm();
-
-  const userName = userInfo.getUserInfo().name;
-  const userProfession = userInfo.getUserInfo().profession;
-
-  namePopup.value = userName;
-  jobPopup.value = userProfession;
-  
+  popupEdit.setInputValues(userInfo.getUserInfo());
   popupEdit.open();
 });
 

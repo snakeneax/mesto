@@ -2,11 +2,8 @@ export default class Card {
   constructor(data, selector, handleCardClick) {
     this._data = data;
     this._selector = selector;
-    this._handleCardClick = handleCardClick;
-   
-    this._handleLikeClick = this._handleLikeClick.bind(this);
-    this._handleDeleteClick = this._handleDeleteClick.bind(this); 
-  }
+    this._handleCardClick = handleCardClick;   
+}
 
 // получаем карточку и нужные елементы
   _getElement() {
@@ -38,10 +35,10 @@ export default class Card {
     this.photo.addEventListener('click', () => this._handleCardClick(this._data));
 
     // лайк карточки
-    this.like.addEventListener('click', this._handleLikeClick);
+    this.like.addEventListener('click', () => this._handleLikeClick());
 
     // удалить карточку
-    this.trash.addEventListener('click', this._handleDeleteClick);
+    this.trash.addEventListener('click', () => this._handleDeleteClick());
   }
 
 //создаем карточки

@@ -5,3 +5,4 @@
 картинке или удалить её вовсе.
 
 https://snakeneax.github.io/mesto/
+

@@ -6,7 +6,7 @@ export default class PopupConfirm extends Popup {
     this._confirmButton = this._popup.querySelector('.popup__button-save')
   }
 
-  Loading (isLoading) {
+  loading (isLoading) {
     if(isLoading) {
       this._confirmButton.textContent = 'Удаление'
     } else {

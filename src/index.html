@@ -8,7 +8,7 @@
 </head>
 <body class="page">
   <header class="header">
-    <img class="header__logo" src="<%=require('./images/logo.svg')%>" alt="Логотип">
+    <img class="header__logo" src="<%= require('./images/logo.svg') %>" alt="Логотип">
   </header>
   <main class="main">
     <section class="profile">
@@ -39,7 +39,7 @@
       <input type="text" placeholder="Профессия" class="popup__input popup__input_type_profession" name="profession" id="profession" minlength="2" maxlength="200" required>
       <label class="popup__label" for="profession"><p class="popup__error" id="profession-error">Вы пропустили это поле.</p></label>
 
-      <input type="submit" value="Сохранить" class="popup__button-save">
+      <button type="submit" value="Сохранить" class="popup__button-save">Сохранить</button>
       </form>
       <button type="button" class="popup__button-close"></button>
     </div>
@@ -52,7 +52,7 @@
       <input type="url" placeholder="Ссылка на аватар" class="popup__input popup__input_type_avatar" name="avatar" id="avatar" minlength="2" maxlength="200" required>
       <label class="popup__label" for="avatar"><p class="popup__error" id="avatar-error">Вы пропустили это поле.</p></label>
 
-      <input type="submit" value="Сохранить" class="popup__button-save">
+      <button type="submit" value="Сохранить" class="popup__button-save">Сохранить</button>
       </form>
       <button type="button" class="popup__button-close"></button>
     </div>
@@ -68,7 +68,7 @@
         <input type="url" placeholder="Ссылка на картинку" class="popup__input popup__input_type_image" name="link" id="link" required>
         <label for="link" class="popup__label"><p class="popup__error" id="link-error">Введите адрес сайта.</p></label>
 
-        <input type="submit" value="Создать" class="popup__button-save">
+        <button type="submit" value="Сохранить" class="popup__button-save">Сохранить</button>
       </form>
       <button type="button" class="popup__button-close"></button>
     </div>
@@ -89,16 +89,7 @@
       </div>
     </div>
   </section>
-  <section class="popup" id="popupDelete">
-    <div class="popup__container">
-      <button type="button" class="popup__button-close"></button>
-      <div class="popup__form">
-        <p class="popup__title">Вы уверены?</p>
-        <button type="button" class="popup__button-save">Да</button>
-      </div>
-    </div>
-  </section>
-  <template id="cardTemplate">
+    <template id="cardTemplate">
     <article class="element card">
       <div class="element__photoCard">
       <img src="#" alt="Фотография" class="element__photo">

@@ -30,7 +30,7 @@ export default class PopupWithForm extends Popup {
     super.close();
   }
 
-  Loading (isLoading) {
+  loading (isLoading) {
     if (isLoading) {
       this._button.textContent = 'Сохранение';
     } else {
@@ -43,7 +43,6 @@ export default class PopupWithForm extends Popup {
     this._form.addEventListener('submit', (evt) => {
       evt.preventDefault();
       this._handleFormSubmit(this._getInputValues());
-      this.close();
     });
   } 
 }

@@ -87,16 +87,17 @@ popupShowPhoto.setEventListeners();
 
 //попап изменения аватара
 const popupChangeAvatar = new PopupWithForm (popupChangeAvatarSelector, (formData) => {
-  popupChangeAvatar.Loading(true);
+  popupChangeAvatar.loading(true);
   api.changeAvatar(formData)
     .then((data) => {
       userInfo.setUserInfo(data);
+      popupChangeAvatar.close()
     })
     .catch((err) => {
       console.log(err)
     })
     .finally(() => {
-      popupChangeAvatar.Loading(false);
+      popupChangeAvatar.loading(false);
     })
 });
 popupChangeAvatar.setEventListeners();
@@ -109,16 +110,17 @@ avatar.addEventListener('click', () => {
 
 // попап добавления фото
 const popupAdd = new PopupWithForm (popupAddCardSelector, (formData) => {
-  popupAdd.Loading(true)
+  popupAdd.loading(true)
   api.addCard(formData)
     .then((data) => {
       cardsList.addItem(data);
+      popupAdd.close()
     })
     .catch((err) => {
       console.log(err)
     })
     .finally(() => {
-      popupAdd.Loading(false)
+      popupAdd.loading(false)
     })
 });
 popupAdd.setEventListeners();
@@ -131,16 +133,17 @@ buttonAdd.addEventListener('click', () => {
 
 // попап изменения профиля
 const popupEdit = new PopupWithForm (popupEditSelector, (formData) => {
-  popupEdit.Loading(true);
+  popupEdit.loading(true);
   api.changeUserInfo(formData)
     .then((data) => {
       userInfo.setUserInfo(data);
+      popupEdit.close()
     })
     .catch((err) => {
       console.log(err);
     })
     .finally(() => {
-      popupEdit.Loading(false)
+      popupEdit.loading(false)
     })
 });
 popupEdit.setEventListeners();
@@ -163,7 +166,7 @@ popupConfirm.setEventListeners();
 const createCard = (data) => {
   const card = new Card(data, cardTemplateSelector, () => popupShowPhoto.open(data), () => {
     popupConfirm.setConfirm(() => {
-      popupConfirm.Loading(true);
+      popupConfirm.loading(true);
       api.deleteCard(data._id)
         .then(() => {
           card.deleteCard();
@@ -172,7 +175,7 @@ const createCard = (data) => {
         .catch((err) => 
           console.log(err))
         .finally(() => 
-        popupConfirm.Loading(false))
+        popupConfirm.loading(false))
     })
     popupConfirm.open()
   },

@@ -2,7 +2,6 @@
   background-color: white;
   width: calc(100% - (19px * 2));
   max-width: 430px;
-  min-height: 322px;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
@@ -15,6 +14,5 @@
 @media screen and (min-width: 1280px) {
   .popup__container {
     width: calc(100% - (200px * 2));
-    min-height: 330px;
   }
 }

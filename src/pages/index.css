@@ -9,7 +9,10 @@
 @import url(../blocks/element/__photo/element__photo.css);
 @import url(../blocks/element/__button/_active/element__button_like_active.css);
 @import url(../blocks/element/__button/_delete/element__button_delete.css);
+@import url(../blocks/element/__button/_delete/_hiden/element__button_delete_hiden.css);
 @import url(../blocks/element/__photoCard/element__photoCard.css);
+@import url(../blocks/element/__like-zone/element__like-zone.css);
+@import url(../blocks/element/___like-counter/element__like-counter.css);
 
 @import url(../blocks/elements/elements.css);
 

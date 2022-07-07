@@ -5,7 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mesto</title>
-<script defer src="main.8f058b7fe50c4b841962.js"></script><link href="main.9dfe07e1f3527c2ae4d1.css" rel="stylesheet"></head>
+<script defer src="main.21cf21a7924e704cc2b7.js"></script><link href="main.b532b6de5b3b30002978.css" rel="stylesheet"></head>
 <body class="page">
   <header class="header">
     <img class="header__logo" src="static/logo.bbe2a6eafac19c3d031c.svg" alt="Логотип">
@@ -13,7 +13,7 @@
   <main class="main">
     <section class="profile">
         <div class="profile__card">
-          <img src="static/image.bbe7c5b6093ec0273de1.jpg" alt="Фотография" class="profile__avatar">
+          <div class="profile__avatar"></div>
           <div class="profile__info">
             <h1 class="profile__name">Жак-Ив Кусто</h1>
             <button type="button" aria-label="Open" class="profile__edit"></button>
@@ -44,6 +44,19 @@
       <button type="button" class="popup__button-close"></button>
     </div>
   </div>
+  <div class="popup" id="popupChangeAvatar">
+    <div class="popup__container">
+      <h2 class="popup__title">Обновить аватар</h2>
+      <form class="popup__form popup__form_type_change-avatar" name="avatar-form" novalidate>
+
+      <input type="url" placeholder="Ссылка на аватар" class="popup__input popup__input_type_avatar" name="avatar" id="avatar" minlength="2" maxlength="200" required>
+      <label class="popup__label" for="avatar"><p class="popup__error" id="avatar-error">Вы пропустили это поле.</p></label>
+
+      <input type="submit" value="Сохранить" class="popup__button-save">
+      </form>
+      <button type="button" class="popup__button-close"></button>
+    </div>
+  </div>
   <div class="popup" id="popupAddCard">
     <div class="popup__container">
       <h2 class="popup__title">Новое место</h2>
@@ -67,6 +80,24 @@
       <h2 class="popup__image-caption"></h2>
     </div>
   </div>
+  <section class="popup" id="popupConfirm">
+    <div class="popup__container">
+      <button type="button" class="popup__button-close"></button>
+      <div class="popup__form">
+        <p class="popup__title">Вы уверены?</p>
+        <button type="button" class="popup__button-save">Да</button>
+      </div>
+    </div>
+  </section>
+  <section class="popup" id="popupDelete">
+    <div class="popup__container">
+      <button type="button" class="popup__button-close"></button>
+      <div class="popup__form">
+        <p class="popup__title">Вы уверены?</p>
+        <button type="button" class="popup__button-save">Да</button>
+      </div>
+    </div>
+  </section>
   <template id="cardTemplate">
     <article class="element card">
       <div class="element__photoCard">
@@ -75,7 +106,10 @@
       </div>
       <div class="element__card">
         <h2 class="element__info"></h2>
-        <button type="button" class="element__button_like"></button>
+        <div class="element__like-zone">
+          <button type="button" class="element__button_like"></button>
+          <span class="element__like-counter">0</span>
+        </div>
       </div>
     </article>
   </template>
